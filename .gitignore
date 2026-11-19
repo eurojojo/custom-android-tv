@@ -1,0 +1,9 @@
+build/
+*.apk
+*.idsig
+*.keystore
+out/
+.env
+secrets.json
+library.json
+feed.xml

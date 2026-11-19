@@ -1,0 +1,26 @@
+# Kaarten + lijst met de laatste NextPVR-opnames voor de Thomson-app.
+# Start:  docker compose up -d --build   (in deze map, met .env, secrets.json en library.json aanwezig)
+services:
+  tvfeed:
+    build: .
+    container_name: tvfeed
+    restart: unless-stopped
+    user: "1000:1000"
+    mem_limit: 256m
+    ports:
+      - "8871:8871"
+    environment:
+      NEXTPVR_HOST: "${NEXTPVR_HOST:?zet NEXTPVR_HOST in .env}"
+      NEXTPVR_PORT: "8866"
+      TVFEED_INTERVAL: "600"
+    volumes:
+      - ./out:/out
+      - ./secrets.json:/secrets.json:ro
+      - ./library.json:/library.json:ro
+      - ${NEXTPVR_CONFIG_DIR:?zet NEXTPVR_CONFIG_DIR in .env}/media:/nextpvr-media:ro
+      - ${NEXTPVR_CONFIG_DIR}/npvr.db3:/npvr.db3:ro
+      - ${RECORDINGS_DIR:?zet RECORDINGS_DIR in .env}:/recordings/new:ro
+      - ${MEDIA_1:-./empty}:/lib/1:ro
+      - ${MEDIA_2:-./empty}:/lib/2:ro
+      - ${MEDIA_3:-./empty}:/lib/3:ro
+      - ${MEDIA_4:-./empty}:/lib/4:ro

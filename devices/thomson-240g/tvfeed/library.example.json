@@ -1,0 +1,7 @@
+{
+  "roots": [
+    {"mount": "/lib/1", "movies": ["Films"], "series": ["Series"]},
+    {"mount": "/lib/2", "movies": ["Films"], "series": ["Series"]}
+  ],
+  "kodi_shares": {"sharenaam": "/lib/1"}
+}
